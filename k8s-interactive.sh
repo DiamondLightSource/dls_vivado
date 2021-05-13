@@ -2,18 +2,22 @@
 
 kubectl delete pod/interactive --ignore-not-found
 
+iUSER_UID=${iUSER_UID:-$(id -u)}
+iUSER_GID=${iUSER_GID:-$(id -g)}
+iUSER_NAME=${iUSER_NAME:-${USER}}
+
 echo """
 apiVersion: v1
 kind: Pod
 metadata:
   name: interactive
-  namespace: hgv27681
+  namespace: ${iUSER_NAME}
   labels:
     type: interactive
 spec:
   securityContext:
-    runAsUser: $(id -u)
-    runAsGroup: $(id -g)
+    runAsUser: ${iUSER_UID}
+    runAsGroup: ${iUSER_GID}
     supplementalGroups:
       # groups dls_bl_cs, dcs
       - 37715
@@ -28,8 +32,8 @@ spec:
         path: /home
         type: Directory
   containers:
-    - name: runner
-      image: gcr.io/diamond-privreg/controls/gitlab-runners:latest
+    - name: interactive
+      image: gcr.io/diamond-privreg/controls/gitlab-runners
       # Just spin & wait forever - so a user a can connect with exec
       command: [ \"/bin/bash\", "-c", "--" ]
       args: [ \"while true; do sleep 30; done;\" ]
@@ -45,13 +49,14 @@ spec:
           name: home
           mountPropagation: HostToContainer
       env:
-      - name: HOME
-        value: ${USER}
       - name: USER
-        value: ${HOME}
-
+        value: ${iUSER_NAME}
+      - name: HOME
+        value: /home/${iUSER_NAME}
 
 """ | kubectl apply -f -
 
-kubectl exec -it interactive -- --init-file ${HOME}/.bash_profile
+echo "launching interactive pod for ${iUSER_NAME} uid${iUSER_UID} gid${iUSER_GID} ..."
+kubectl wait --for=condition=Ready pod/interactive
+kubectl exec -it interactive -- bash --init-file /home/${iUSER_NAME}/.bash_profile
 kubectl delete pod/interactive
