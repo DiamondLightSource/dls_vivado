@@ -1,10 +1,12 @@
 #!/bin/bash
 
-kubectl delete pod/interactive --ignore-not-found
 
 iUSER_UID=${iUSER_UID:-$(id -u)}
 iUSER_GID=${iUSER_GID:-$(id -g)}
 iUSER_NAME=${iUSER_NAME:-${USER}}
+
+
+kubectl delete --namespace ${iUSER_NAME} pod/interactive --ignore-not-found
 
 echo """
 apiVersion: v1
