@@ -1,10 +1,15 @@
 #!/bin/bash
 
-
 iUSER_UID=${iUSER_UID:-$(id -u)}
 iUSER_GID=${iUSER_GID:-$(id -g)}
 iUSER_NAME=${iUSER_NAME:-${USER}}
+iUSER_GROUPS=${iUSER_GROUPS:-$(id -G)}
 
+iGROUP_IDS=''
+for g in ${iUSER_GROUPS}; do
+  iGROUP_IDS=${iGROUP_IDS}"""
+      - ${g}"""
+done
 
 kubectl delete --namespace ${iUSER_NAME} pod/interactive --ignore-not-found
 
