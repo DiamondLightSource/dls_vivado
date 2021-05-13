@@ -14,6 +14,8 @@ done
 
 kubectl delete --namespace ${iUSER_NAME} pod/interactive --ignore-not-found
 
+echo "launching interactive pod for ${iUSER_NAME} uid:${iUSER_UID} gid:${iUSER_GID} groups: ${iGROUP_IDS}"
+
 echo """
 apiVersion: v1
 kind: Pod
@@ -64,7 +66,6 @@ spec:
 
 """ | kubectl apply -f -
 
-echo "launching interactive pod for ${iUSER_NAME} uid:${iUSER_UID} gid:${iUSER_GID} groups: ${iGROUP_IDS}"
 kubectl wait --for=condition=Ready pod/interactive
 kubectl exec -it interactive -- bash --init-file /home/${iUSER_NAME}/.bash_profile
 kubectl delete pod/interactive
