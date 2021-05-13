@@ -1,0 +1,24 @@
+.. _API:
+
+API
+===
+
+This is the internal API reference for dls_vivado
+
+You can mix verbose text with docstring and signature extraction by
+using ``autoclass`` and ``autofunction`` directives instead of
+``automodule`` below.
+
+``dls_vivado``
+-----------------------------------
+
+.. data:: dls_vivado.__version__
+    :type: str
+
+    Version number as calculated by https://github.com/dls-controls/versiongit
+
+.. automodule:: dls_vivado.dls_vivado
+    :members:
+
+    ``dls_vivado.dls_vivado``
+    -------------------------------------------------------------------
