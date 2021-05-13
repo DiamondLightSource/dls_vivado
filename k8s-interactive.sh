@@ -7,6 +7,7 @@ iUSER_GROUPS=${iUSER_GROUPS:-$(id -G)}
 
 iGROUP_IDS=''
 for g in ${iUSER_GROUPS}; do
+  if [ "${g}" == "${iUSER_GID}" ]; then continue; fi
   iGROUP_IDS=${iGROUP_IDS}"""
       - ${g}"""
 done
@@ -25,10 +26,7 @@ spec:
   securityContext:
     runAsUser: ${iUSER_UID}
     runAsGroup: ${iUSER_GID}
-    supplementalGroups:
-      # groups dls_bl_cs, dcs
-      - 37715
-      - 500
+    supplementalGroups: ${iGROUP_IDS}
   volumes:
     - name: dlssw
       hostPath:
@@ -66,7 +64,7 @@ spec:
 
 """ | kubectl apply -f -
 
-echo "launching interactive pod for ${iUSER_NAME} uid${iUSER_UID} gid${iUSER_GID} ..."
+echo "launching interactive pod for ${iUSER_NAME} uid:${iUSER_UID} gid:${iUSER_GID} groups: ${iGROUP_IDS}"
 kubectl wait --for=condition=Ready pod/interactive
 kubectl exec -it interactive -- bash --init-file /home/${iUSER_NAME}/.bash_profile
 kubectl delete pod/interactive
