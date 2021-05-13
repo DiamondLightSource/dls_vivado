@@ -3,8 +3,7 @@ dls_vivado
 
 |code_ci| |docs_ci| |coverage| |pypi_version| |license|
 
-This is where you should write a short paragraph that describes what your module does,
-how it does it, and why people should use it.
+A test project to try out vivado container and github CI
 
 ============== ==============================================================
 PyPI           ``pip install dls_vivado``
@@ -12,9 +11,6 @@ Source code    https://github.com/dls-controls/dls_vivado
 Documentation  https://dls-controls.github.io/dls_vivado
 ============== ==============================================================
 
-This is where you should put some images or code snippets that illustrate
-some relevant examples. If it is a library then you might put some
-introductory code here:
 
 .. code:: python
 

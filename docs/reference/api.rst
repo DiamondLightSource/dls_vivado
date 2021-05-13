@@ -3,10 +3,8 @@
 API
 ===
 
-This is the internal API reference for dls_vivado
+No API yet
 
-You can mix verbose text with docstring and signature extraction by
-using ``autoclass`` and ``autofunction`` directives instead of
 ``automodule`` below.
 
 ``dls_vivado``
