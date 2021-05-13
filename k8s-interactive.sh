@@ -47,7 +47,10 @@ spec:
       resources:
         limits:
           memory: \"128Mi\"
-          cpu: \"500m\"
+          cpu: \"4\"
+        requests:
+          memory: \"32Mi\"
+          cpu: \"2\"
       volumeMounts:
         - mountPath: /dls_sw
           name: dlssw
