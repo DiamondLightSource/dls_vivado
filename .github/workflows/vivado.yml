@@ -1,0 +1,14 @@
+
+name: vivado
+on: push
+
+jobs:
+  node-docker:
+    runs-on: ubuntu-latest
+    container:
+      image: aperloff/vivado-docker:centos7.7.1908_vivado2019.2_x11
+    steps:
+         - name: Log the node version
+           run: |
+             echo hello vivado
+             echo "user: $USER"

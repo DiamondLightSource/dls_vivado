@@ -65,3 +65,4 @@ target/
 /lightweight-venv/
 /installed.files
 
+.history
