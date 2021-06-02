@@ -1,12 +1,20 @@
 #!/bin/bash
 
-
 iUSER_UID=${iUSER_UID:-$(id -u)}
 iUSER_GID=${iUSER_GID:-$(id -g)}
 iUSER_NAME=${iUSER_NAME:-${USER}}
+iUSER_GROUPS=${iUSER_GROUPS:-$(id -G)}
 
+iGROUP_IDS=''
+for g in ${iUSER_GROUPS}; do
+  if [ "${g}" == "${iUSER_GID}" ]; then continue; fi
+  iGROUP_IDS=${iGROUP_IDS}"""
+      - ${g}"""
+done
 
 kubectl delete --namespace ${iUSER_NAME} pod/interactive --ignore-not-found
+
+echo "launching interactive pod for ${iUSER_NAME} uid:${iUSER_UID} gid:${iUSER_GID} groups: ${iGROUP_IDS}"
 
 echo """
 apiVersion: v1
@@ -20,10 +28,7 @@ spec:
   securityContext:
     runAsUser: ${iUSER_UID}
     runAsGroup: ${iUSER_GID}
-    supplementalGroups:
-      # groups dls_bl_cs, dcs
-      - 37715
-      - 500
+    supplementalGroups: ${iGROUP_IDS}
   volumes:
     - name: dlssw
       hostPath:
@@ -61,7 +66,6 @@ spec:
 
 """ | kubectl apply -f -
 
-echo "launching interactive pod for ${iUSER_NAME} uid${iUSER_UID} gid${iUSER_GID} ..."
 kubectl wait --for=condition=Ready pod/interactive
 kubectl exec -it interactive -- bash --init-file /home/${iUSER_NAME}/.bash_profile
 kubectl delete pod/interactive
