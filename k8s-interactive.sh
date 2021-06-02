@@ -40,9 +40,12 @@ spec:
       command: [ \"/bin/bash\", "-c", "--" ]
       args: [ \"while true; do sleep 30; done;\" ]
       resources:
+        requests:
+          memory: \"128Mi\"
+          cpu: \"20\"
         limits:
           memory: \"128Mi\"
-          cpu: \"500m\"
+          cpu: \"20\"
       volumeMounts:
         - mountPath: /dls_sw
           name: dlssw
