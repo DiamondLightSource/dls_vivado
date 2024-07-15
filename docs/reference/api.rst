@@ -13,7 +13,7 @@ No API yet
 .. data:: dls_vivado.__version__
     :type: str
 
-    Version number as calculated by https://github.com/dls-controls/versiongit
+    Version number as calculated by https://github.com/DiamondLightSource/versiongit
 
 .. automodule:: dls_vivado.dls_vivado
     :members:
