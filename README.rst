@@ -7,8 +7,8 @@ A test project to try out vivado container and github CI
 
 ============== ==============================================================
 PyPI           ``pip install dls_vivado``
-Source code    https://github.com/dls-controls/dls_vivado
-Documentation  https://dls-controls.github.io/dls_vivado
+Source code    https://github.com/DiamondLightSource/dls_vivado
+Documentation  https://DiamondLightSource.github.io/dls_vivado
 ============== ==============================================================
 
 
@@ -24,16 +24,16 @@ Or if it is a commandline tool then you might put some example commands here::
     dls_vivado person --times=2
 
 
-.. |code_ci| image:: https://github.com/dls-controls/dls_vivado/workflows/Code%20CI/badge.svg?branch=master
-    :target: https://github.com/dls-controls/dls_vivado/actions?query=workflow%3A%22Code+CI%22
+.. |code_ci| image:: https://github.com/DiamondLightSource/dls_vivado/workflows/Code%20CI/badge.svg?branch=master
+    :target: https://github.com/DiamondLightSource/dls_vivado/actions?query=workflow%3A%22Code+CI%22
     :alt: Code CI
 
-.. |docs_ci| image:: https://github.com/dls-controls/dls_vivado/workflows/Docs%20CI/badge.svg?branch=master
-    :target: https://github.com/dls-controls/dls_vivado/actions?query=workflow%3A%22Docs+CI%22
+.. |docs_ci| image:: https://github.com/DiamondLightSource/dls_vivado/workflows/Docs%20CI/badge.svg?branch=master
+    :target: https://github.com/DiamondLightSource/dls_vivado/actions?query=workflow%3A%22Docs+CI%22
     :alt: Docs CI
 
-.. |coverage| image:: https://codecov.io/gh/dls-controls/dls_vivado/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/dls-controls/dls_vivado
+.. |coverage| image:: https://codecov.io/gh/DiamondLightSource/dls_vivado/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/DiamondLightSource/dls_vivado
     :alt: Test Coverage
 
 .. |pypi_version| image:: https://img.shields.io/pypi/v/dls_vivado.svg
@@ -48,4 +48,4 @@ Or if it is a commandline tool then you might put some example commands here::
     Anything below this line is used when viewing README.rst and will be replaced
     when included in index.rst
 
-See https://dls-controls.github.io/dls_vivado for more detailed documentation.
+See https://DiamondLightSource.github.io/dls_vivado for more detailed documentation.
